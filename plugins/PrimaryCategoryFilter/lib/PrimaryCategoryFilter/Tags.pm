@@ -15,7 +15,13 @@ sub primary_category_filter {
         { ( $blog_ids ? ( blog_id => $blog_ids ) : () ), label => $cat_arg },
         { fetchonly => ['id'] } );
 
-    return unless @cats;
+    unless (@cats) {
+        # can't find a category
+        # can't raise an error
+        # so we'll force all entries to not pass the filter
+        push @{$ctx->{filters}}, sub { 0 };
+        return;
+    }
 
     require MT::Placement;
     $ctx->{args}->{join} =
