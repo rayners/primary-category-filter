@@ -1,0 +1,11 @@
+
+name: Primary Category Filter
+description: Adds a primary_category argument to the mt:entries tag
+version: 1.0
+
+tags:
+    filters:
+        Entries:
+            primary_category:
+                handler: $PrimaryCategoryFilter::PrimaryCategoryFilter::Tags::primary_category_filter
+
